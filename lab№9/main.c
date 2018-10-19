@@ -66,3 +66,17 @@ void print_(int** array, int row, int col){
    printf("\n");
 }
 }
+
+//sum all elements of diagonal array
+int summ_elements_array_2(int** array, int row, int col){
+    int i, j, n = 0;
+    int* arr;
+
+
+    for(i=0;i<row;i++){
+            for(j=i+1;j<col;j++){
+               n=n+array[i][j];
+            }
+    }
+    return n;
+}
