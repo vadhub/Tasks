@@ -41,13 +41,18 @@ for(i = 0;i<RowCount;i++){
     }
     printf("\n");
 }
+
+printf("%d", summ_elements_array(array, RowCount, ColCount));
     return 0;
 }
 
 int summ_elements_array(int** array, int row, int col){
-    int i;
+    int i, j, n;
     int numElements = col*row;
-    for(i=0;i<numElements;i++){
-
+    for(i=0;i<row;i++){
+            for(j=0;j<col;j++){
+               n+=array[i][j];
+            }
     }
+    return n;
 }
