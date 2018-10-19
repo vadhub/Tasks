@@ -23,7 +23,6 @@ int main()
         if(nElements>=dopN){
             dopN = nElements;
         }
-
     }
     printf("max size set: %d\n", dopN);
     free(array);
