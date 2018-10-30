@@ -8,7 +8,6 @@ int** array;
 int i,j, result = 0;
 int RowCount,ColCount;
 
-
 printf("Enter count of row: ");
 scanf("%d",&RowCount);
 printf("Enter count of col: ");
@@ -22,9 +21,7 @@ for (i=0;i<RowCount;i++){
   array[i]=(int *)malloc(sizeof(int)*ColCount);
 
   for(j=0;j<ColCount;j++){
-
-    printf("Enter Array [%d,%d]: ",i,j);
-    scanf("%d",&array[i][j]);
+        array[i][j] = 0 + rand()%RowCount;
   };
 };
 
@@ -46,8 +43,6 @@ array=(int **)realloc(array,0);
 //sum all elements array
 int summ_elements_array(int** array, int row, int col){
     int i, j, n = 0;
-    int* arr;
-
 
     for(i=0;i<row;i++){
             for(j=0;j<col;j++){
@@ -64,19 +59,5 @@ void print_(int** array, int row, int col){
         printf("%d\t", array[i][j]);
     }
    printf("\n");
-}
-}
-
-//sum all elements of diagonal array
-int summ_elements_array_2(int** array, int row, int col){
-    int i, j, n = 0;
-    int* arr;
-
-
-    for(i=0;i<row;i++){
-            for(j=i+1;j<col;j++){
-               n=n+array[i][j];
-            }
     }
-    return n;
 }

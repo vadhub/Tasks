@@ -9,7 +9,7 @@ int main()
     printf("enter second number: ");
     scanf("%d", &b);
 
-    printf("nok = %d",nok(a,b));
+    printf("HOK = %d",nok(a,b));
     return 0;
 }
 
