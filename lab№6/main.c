@@ -3,65 +3,86 @@
 
 int main()
 {
-// *** Variables ***
+//variables
 
 int** array;
+int** array2;
 int i,j;
 int RowCount,ColCount;
 
-// *** Program code ***
-
-// Input size of array
+//input size of array
 printf("Enter count of row: ");
 scanf("%d",&RowCount);
 printf("Enter count of col: ");
 scanf("%d",&ColCount);
 
-// Print entered size
+//print entered size
 printf("Array size: %dx%d\n",RowCount,ColCount);
 
-// Create array of int* - allocate memory
+//create arrays of int
 array= (int **)malloc(sizeof(int*)*RowCount);
+array2= (int **)malloc(sizeof(int*)*RowCount);
 
-// for every pointer to int
+//for cycles
 for (i=0;i<RowCount;i++){
-  // Allocate memory for array line of integers
+  //for line
   array[i]=(int *)malloc(sizeof(int)*ColCount);
-  // Get array numbers
+  //get array numbers
   for(j=0;j<ColCount;j++){
     printf("Enter Array [%d,%d]: ",i,j);
-    // Enter all the integers in array
+    //enter all the integers in array
     scanf("%d",&array[i][j]);
   };
 };
 
 for (i=0;i<RowCount;i++){
+     array2[i]=(int *)malloc(sizeof(int)*ColCount);
   for(j=0;j<ColCount;j++){
-      if(j==0&&i==0){
-            array[i][j] =(int)((array[i][j+1]+array[i+1][j])/2);
-      }else if(j>0&&j!=ColCount&&i==0){
-            array[i][j] = (int)((array[i-1][j]+array[i+1][j]+array[i][j+1])/3);
-      }else if(j==ColCount&&i==0){
-           array[i][j] = (int)((array[i-1][j]+array[i][j+1])/2);
-      }else if(j>0&&i>0&&j!=ColCount&&i!=RowCount){
-            array[i][j] = (int)((array[i-1][j]+array[i][j+1]+array[i][j+1]+array[i][j-1])/4);
-      }else if(j==0&&i==RowCount){
-            array[i][j] = (int)((array[i+1][j]+array[i][j-1])/2);
-      }else if(j==0&&i>0&&i!=RowCount){
-            array[i][j] = (int)((array[i+1][j]+array[i-1][j])/2);
-      }else if(j>0&&i==RowCount&&j!=ColCount){
-            array[i][j] = (int)((array[i][j+1]+array[i][j-1])/2);
-      }else if(j==ColCount&&i==RowCount){
-            array[i][j] = (int)((array[i][j-1]+array[i-1][j])/2);
-      }
+        //for square array
+  if(RowCount==2&&ColCount==2){
+            if(i==0&&j==0){
+            /*
+                00
+                0
+            */
+            array2[i][j] = (int)(array[i][j]+array[i][j+1]+array[i+1][j])/3;
+            }else if(i==0&&j<=ColCount){
+            /*
+                00
+                 0
+            */
+            array2[i][j] = (int)(array[i][j]+array[i][j-1]+array[i+1][j])/3;
+            }else if(i<=RowCount&&j==0){
+            /*
+                0
+                00
+            */
+            array2[i][j] = (int)(array[i][j]+array[i-1][j]+array[i][j+1])/3;
+            }else if(i<=RowCount&&j<=ColCount){
+            /*
+                 0
+                00
+            */
+            array2[i][j] = (int)(array[i][j]+array[i-1][j]+array[i][j-1])/3;
+            }
+        }else if(RowCount>2&&ColCount>2){
+            if(i==0&&j==0){
+                array2[i][j] = (array[i][j]+array[i+1][j]+array[i][j+1])/3;
+            }else if(i==0&&j>0&&j!=ColCount){
+                array2[i][j] = (array[i][j]+array[i][j-1]+array[i][j+1]+array[i+1][j+1])/4;
+            }else if(i>0&&j>0&&i!=RowCount&&j!=ColCount){
+                array2[i][j] = (array[i][j]+array[i][j-1]+array[i-1][j]+array[i][j+1]+array[i+1][j])/5;
+            }else if(i>0&&j==0&&i!=RowCount){
+                array2[i][j] = (array[i][j]+array[i+1][j]+array[i-1][j]+array[i][j+1])/4;
+            }
+        }
   };
-  printf("\n");
 };
 
 for (i=0;i<RowCount;i++){
   for(j=0;j<ColCount;j++){
     // Print out the integers from array
-    printf("%d\t",array[i][j]);
+    printf("%d\t",array2[i][j]);
   };
   printf("\n");
 };
