@@ -15,20 +15,6 @@ scanf("%d",&ColCount);
 
 printf("Array size: %dx%d\n",RowCount,ColCount);
 
-array= (int **)malloc(sizeof(int*)*RowCount);
-
-for (i=0;i<RowCount;i++){
-  array[i]=(int *)malloc(sizeof(int)*ColCount);
-
-  for(j=0;j<ColCount;j++){
-        array[i][j] = 0 + rand()%RowCount;
-  };
-};
-
-print_(array, RowCount, ColCount);
-
-result = summ_elements_array(array,RowCount,ColCount);
-printf("%d", result);
 
 for (i=0;i<RowCount;i++){
   //Clear memory used by lines
@@ -41,23 +27,47 @@ array=(int **)realloc(array,0);
     return 0;
 }
 //sum all elements array
-int summ_elements_array(int** array, int row, int col){
-    int i, j, n = 0;
-
-    for(i=0;i<row;i++){
-            for(j=0;j<col;j++){
-               n=n+array[i][j];
-            }
+void summ_elements_array(int** array, int size){
+    int i, j, n;
+    srand(time(0));
+    array = (int **)malloc(size*sizeof(int*));
+    for(i=0;i<size;i++){
+        array[i] = (int*)malloc(size*sizeof(int));
+        for(j=0;j<size;j++){
+             array[i][j] = rand()%10;
+        }
     }
-    return n;
+    int x;
+    for(i=0;i<size-1;i++){
+        for(j=0;j<size-1;j++){
+            x=array[i][j];
+            array[i][j]=array[size-j+1][size-i+1];
+            array[size-j+1][size-i+1]=x;
+        }
+    }
+
+
+
+    for (i=0;i<RowCount;i++){
+    //Clear memory used by lines
+        array[i]=(int *)realloc(array[i],0);
+    };
+
+    //Clear memory
+    array=(int **)realloc(array,0);
+     /*for(i=0;i<size;i++){
+        for(j=0;j<size;j++){
+               n=n+array[i][j];
+        }
+    }*/
 }
 //print array
 void print_(int** array, int row, int col){
     int i, j;
     for(i = 0;i<row;i++){
-    for(j=0;j<col;j++){
-        printf("%d\t", array[i][j]);
-    }
-   printf("\n");
+        for(j=0;j<col;j++){
+            printf("%d\t", array[i][j]);
+        }
+        printf("\n");
     }
 }
